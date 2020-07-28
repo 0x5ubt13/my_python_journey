@@ -13,7 +13,6 @@ for char in phrase_1:
         characters_parsed.append(char)
         count_characters_parsed += 1
 
-print(characters_parsed)
 characters_parsed.sort()
 print(characters_parsed)
 
