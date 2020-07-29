@@ -3,7 +3,8 @@
 # This exercise is a continuation from exercise 24 and therefore the code will be overall a copy of it
 
 # Initializing vars
-characters_allowed = "qwertyuiopasdfghjklzxcvbnm"
+allowed_characters = "qwertyuiopasdfghjklzxcvbnm"
+forbidden_characters = [' ', '!', '"', '£', '$', '%', '^', '&', '*', '(', ')', '_', '+', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '`', '[', ']', '{', '}', '#', '@', '~', '\'', '?', '/', '>', '.', '<', ',', '¦', '€', '\n', '\t']
 characters_parsed = []
 characters_parsed_2 = []
 count_characters_parsed = 0
@@ -22,7 +23,7 @@ To Sherlock Holmes she is always the woman. I have seldom heard him mention her 
 
 # For loop for parsing the input to only letters and sorting them alphabetically afterwards
 for char in key_phrase_1:
-    if char in characters_allowed:
+    if char in allowed_characters:
         characters_parsed.append(char)
         count_characters_parsed += 1
 characters_parsed.sort()
@@ -57,7 +58,7 @@ Quite so! You have not observed. And yet you have seen. That is just my point. N
 
 # For loop for parsing the input to only letters and sorting them alphabetically afterwards
 for char in key_phrase_2:
-    if char in characters_allowed:
+    if char in allowed_characters:
         characters_parsed_2.append(char)
         count_characters_parsed_2 += 1
 characters_parsed_2.sort()
@@ -87,21 +88,26 @@ encoded_phrase = []
 decoded_phrase = []
 
 # Taking all the input necessary from the user
-choice = input("Welcome to the Code Breakers App!\nWould you like to encode or decode? ").lower().strip()
+print("Welcome to the Code Breakers App!")
 while True:
+    choice = input("\nWould you like to encode or decode? ").lower().strip()
+    
     if choice == 'encode':
-        plaintext = input("Please enter your plaintext to encode here: ").lower()
-        for c, d in plaintext, final_1:
-            index = plaintext.index(d)
-            
-            encoded_phrase.append(c)
+        plaintext = input("Please enter your plaintext to encode here: ").lower().strip()
+        for c in forbidden_characters:
+            plaintext = plaintext.replace(c, "")
+        for c in plaintext:
+            print(c)
+            index = final_1.index(c)
+            letter = final_2[index]
+            encoded_phrase.append(letter)
+        print("".join(encoded_phrase))
     elif choice == 'decode':
         ciphertext = input("Please enter your ciphertext to decode here: ").lower()
         for c in ciphertext:
             decoded_phrase.append(c)
     else:
-        print("Please chooose one of the following: ")
+        print("Wrong input: " + choice)
         continue
     break
-
 

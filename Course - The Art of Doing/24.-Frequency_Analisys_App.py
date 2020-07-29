@@ -1,7 +1,7 @@
 #!/usr/bin python3
 
 # Initializing vars
-characters_allowed = "qwertyuiopasdfghjklzxcvbnm"
+allowed_characters = "qwertyuiopasdfghjklzxcvbnm"
 characters_parsed = []
 characters_parsed_2 = []
 count_characters_parsed = 0
@@ -16,7 +16,7 @@ key_phrase_1 = input("Welcome to the Frequency Analysis App.\n\nEnter a word or 
 
 # For loop for parsing the input to only letters and sorting them alphabetically afterwards
 for char in key_phrase_1:
-    if char in characters_allowed:
+    if char in allowed_characters:
         characters_parsed.append(char)
         count_characters_parsed += 1
 characters_parsed.sort()
@@ -46,7 +46,7 @@ key_phrase_2 = input("\nEnter a new word or phrase to count the occurrence of ea
 
 # For loop for parsing the input to only letters and sorting them alphabetically afterwards
 for char in key_phrase_2:
-    if char in characters_allowed:
+    if char in allowed_characters:
         characters_parsed_2.append(char)
         count_characters_parsed_2 += 1
 characters_parsed_2.sort()
