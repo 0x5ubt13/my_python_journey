@@ -89,23 +89,30 @@ decoded_phrase = []
 
 # Taking all the input necessary from the user
 print("Welcome to the Code Breakers App!")
+
+# While loop for refraining the user from entering a wrong choice  
 while True:
     choice = input("\nWould you like to encode or decode? ").lower().strip()
-    
+    # Encoding statement
     if choice == 'encode':
         plaintext = input("Please enter your plaintext to encode here: ").lower().strip()
         for c in forbidden_characters:
             plaintext = plaintext.replace(c, "")
         for c in plaintext:
-            print(c)
             index = final_1.index(c)
             letter = final_2[index]
             encoded_phrase.append(letter)
         print("".join(encoded_phrase))
+    # Decoding statement
     elif choice == 'decode':
         ciphertext = input("Please enter your ciphertext to decode here: ").lower()
+        for c in forbidden_characters:
+            ciphertext = ciphertext.replace(c, "")
         for c in ciphertext:
-            decoded_phrase.append(c)
+            index = final_2.index(c)
+            letter = final_1[index]
+            decoded_phrase.append(letter)
+        print("".join(decoded_phrase))
     else:
         print("Wrong input: " + choice)
         continue
