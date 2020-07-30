@@ -13,10 +13,7 @@ while True:
         i += 1
     print("\nIn summary:")
     for i in range((len(factors)+1)//2):
-        if i == 0:
-            print(factors[i], "*", factors[-1], '=', str(key_number))
-        else:
-            print(factors[i], "*", factors[-i-1], '=', str(key_number))
+        print(factors[i], "*", factors[-i-1], '=', str(key_number))
     choice = input("Run again? (y/n) ")
     if choice == 'n':
         break
