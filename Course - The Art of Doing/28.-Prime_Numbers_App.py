@@ -1,4 +1,5 @@
 #/usr/bin python3
+import time
 
 print('Welcome to the Prime Number App.')
 
@@ -30,13 +31,21 @@ while True:
 
     elif set_mode == '2':
         primes = []
-        numbers = input("Please enter two numbers to determine how many Prime numbers there are in their range: ").replace(",", "").strip().split()
+        numbers = []
+        lower = input("Please enter the lower bound of your range: ").replace(",", "").strip()
+        numbers.append(lower)
+        higher = input("Please enter the higher bound of your range: ").replace(",", "").strip()
+        numbers.append(higher)
+        tic = time.perf_counter()
         for i in range(int(numbers[0]), int(numbers[1])+1):
             for num in range(2, (i+1)):
                 if i % num == 0 and num != i:
                     break
                 elif num == i:
                     primes.append(num)
+        toc = time.perf_counter()
+        tictoc = toc - tic
+        print(f"Calculations took a total of {tictoc:0.4f} seconds")
         choice = input("Do you want to see all the numbers that are Prime within the given range? (y/n): ").lower().strip()
         if choice == 'y': 
             for prime in primes:
