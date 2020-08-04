@@ -1,4 +1,4 @@
-#/usr/bin python3
+#/usr/bin/python3
 
 print("Welcome to the Factor Generator App")
 while True:

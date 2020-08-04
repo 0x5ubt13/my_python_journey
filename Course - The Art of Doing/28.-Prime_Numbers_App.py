@@ -1,4 +1,4 @@
-#/usr/bin python3
+#/usr/bin/python3
 import time
 
 print('Welcome to the Prime Number App.')

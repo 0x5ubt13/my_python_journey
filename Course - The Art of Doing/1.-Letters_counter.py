@@ -1,4 +1,4 @@
-#!/usr/env/python3
+#!/usr/bin/python3
 
 print('Welcome to 5ubt13\'s letters counter program!')
 

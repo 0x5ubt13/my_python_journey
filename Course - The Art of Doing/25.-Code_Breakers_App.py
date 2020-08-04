@@ -1,4 +1,4 @@
-#!/usr/bin python3
+#!/usr/bin/python3
 
 # This exercise is a continuation from exercise 24 and therefore the code will be overall a copy of it
 
