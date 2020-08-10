@@ -25,9 +25,14 @@ def multiplication(number1, number2):
 
 def division(number1, number2):
     """ Divides and records the operation in history[] """
-    result = number1 / number2
-    print(f"The quotient of {number_1} and {number_2} is {result}")
-    history.append(f"{number_1} / {number_2} = {result}")
+    if number2 != 0:
+        result = number1 / number2
+        print(f"The quotient of {number_1} and {number_2} is {result}")
+        history.append(f"{number_1} / {number_2} = {result}")
+    else:
+        print("You cannot divide by zero!")
+        result = "DIV ERROR"
+        history.append(result)
     return result
 
 def exponentiation(number1, number2):
@@ -67,8 +72,11 @@ def user_input():
             exponentiation(number_1, number_2)
         else:
             print("Operation not valid, please try again")
+            result = "OPP ERROR"
+            history.append(result)
             continue
         break
+        
 
 def summary():
     """ Prints out the summary """
