@@ -177,13 +177,15 @@ while playing:
             print(f"------ Round #{round_number} ------")
             pet.display_info()
             pet.turn()
+            if pet.is_alive == False:
+                alive = False
+                break
         print(f"------ Round #{round_number} summary ------")
         round_number += 1
         pet.adding_turn()
         pet.summary()
         
-        if pet.is_alive == False:
-            alive = False
+        
 
     again = input("Play again? (y/n): ")
     if again == 'n':
