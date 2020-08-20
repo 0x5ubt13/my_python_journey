@@ -184,8 +184,6 @@ while playing:
         round_number += 1
         pet.adding_turn()
         pet.summary()
-        
-        
 
     again = input("Play again? (y/n): ")
     if again == 'n':
