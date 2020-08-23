@@ -208,8 +208,3 @@ while game.money > 0:
     game.wipe()
 
 print("\nSorry, you ran out of money. Please play again.")
-
-
-
-
-
