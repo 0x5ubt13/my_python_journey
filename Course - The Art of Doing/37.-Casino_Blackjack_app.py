@@ -167,7 +167,7 @@ class Game():
                 else:
                     if len(self.players_hand) == 2 and "A" in self.players_hand and self.players_score == 21:
                         print("You've scored a Blackjack!!!!")
-                        self.money += self.bet * 2
+                        self.money += self.bet * 3
                     else:
                         if self.players_score > self.houses_score:
                             print(f"Dealer gets {self.houses_score}.")
@@ -208,3 +208,13 @@ while game.money > 0:
     game.wipe()
 
 print("\nSorry, you ran out of money. Please play again.")
+
+
+""" 
+To do:
+- Merging 2nd house_turn() into reveal_houses_hand()
+- Creating artwork for cards
+- Reviewing comments
+- Adding functionality to make the Ace's value both 1 and 11
+
+"""
