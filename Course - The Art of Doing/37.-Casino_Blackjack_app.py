@@ -213,6 +213,7 @@ print("\nSorry, you ran out of money. Please play again.")
 """ 
 To do:
 - Merging 2nd house_turn() into reveal_houses_hand()
+- Reviewing reveal_houses_card() control flow to erase indentation
 - Creating artwork for cards
 - Reviewing comments
 - Adding functionality to make the Ace's value both 1 and 11
