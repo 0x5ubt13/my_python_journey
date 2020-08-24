@@ -118,7 +118,7 @@ class Game():
         """ Method to make the player play """
 
         print("Your cards:")
-        for i in range(2):
+        for _ in range(2):
             self.players_hand.append(self.draw()) 
             self.players_score += self.values
             self.values = 0
