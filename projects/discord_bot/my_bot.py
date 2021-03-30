@@ -2,9 +2,9 @@
 import discord
 import emojis
 import logging
-from pathlib import Path
 import json
 import typing
+from pathlib import Path
 from discord.ext import commands
 
 cwd = Path(__file__).parents[0]
@@ -13,19 +13,34 @@ print(f"{cwd}\n-----")
 
 # Hiding the token
 secret_file = json.load(open(cwd+'/bot_config/secrets.json'))
+bot = commands.Bot(command_prefix='$', case_insensitive=True)
+bot.config_token = secret_file['token']
+logging.basicConfig(level=logging.INFO)
 
-client = discord.Client()
 
-
-@client.event
+@bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print(f"-----\nLogged in as: {bot.user.name} : {bot.user.id}\n-----\nMy current prefix is: $\n-----")
+    # Changing the bot activity:
+    await bot.change_presence(activity=discord.Game(name=f"Hey! Listening to $help"))
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.command(name='hi', aliases=['hello'])
+async def _hi(ctx):
+    """ A simple command which says hi to the author """
+    await ctx.send(f"Hi {ctx.author.mention}!")
+    # Another way of doing this would be (user object).mention
+    #await ctx.send(f"Hi <@{ctx.author.id}>!"
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+
+@bot.command()
+async def echo(ctx, *, message=None):
+    """ A simple command that repeats the user's input back to them"""
+    message = message or "Please provide the message to be repeated"
+    await ctx.message.delete()
+    await ctx.send(message)
+
+# Run the bot!
+bot.run(bot.config_token)
+
+
