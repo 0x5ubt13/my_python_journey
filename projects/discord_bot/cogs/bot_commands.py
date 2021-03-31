@@ -2,7 +2,8 @@ import platform
 import discord
 from discord.ext import commands
 
-class Commands(bot_commands.Cog):
+
+class Commands(commands.Cog, name="bot_commands"):
 
     def __init__(self, bot):
         self.bot = bot
@@ -21,7 +22,7 @@ class Commands(bot_commands.Cog):
 
         embed = discord.Embed(title=f'{self.bot.user.name} Stats', description='\uFEFF', colour=ctx.author.colour, timestamp=ctx.message.created_at)
 
-        embed.add_field(name='Bot Version:', value=self.bot.Version)
+        embed.add_field(name='Bot Version:', value=0.2)
         embed.add_field(name='Python Version:', value=python_version)
         embed.add_field(name='Discord.py Version', value=dpy_version)
         embed.add_field(name='Total Guilds:', value=server_count)
@@ -37,7 +38,11 @@ class Commands(bot_commands.Cog):
     async def logout(self, ctx):
         """ If you are the owner, you can manually kill the bot using this command """
         await ctx.send(f"Beep bop. Hey {ctx.author.mention}, I'm logging out now :wave:")
-        await bot.logout()
+        await ctx.bot.logout()
+
+
+def setup(bot):
+    bot.add_cog(Commands(bot))
 
 
 

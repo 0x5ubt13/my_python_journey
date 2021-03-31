@@ -1,6 +1,7 @@
 import discord
 import emojis
 import typing
+from discord.ext import commands
 
 
 class ReactionRolesNotSetup(commands.CommandError):
@@ -20,7 +21,8 @@ def is_setup():
         return True
     return commands.check(wrap_func)
 
-class Reactions(commands.Cog, name="ReactionRoles")
+
+class Reactions(commands.Cog, name="ReactionRoles"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -33,7 +35,7 @@ class Reactions(commands.Cog, name="ReactionRoles")
 
     @reactionroles.command(name="channel")
     @commands.guild_only()
-    @command.has_guild_permissions(manage_channels=True)
+    @commands.has_guild_permissions(manage_channels=True)
     async def rr_channel(self, ctx, channel: discord.TextChannel = None):
         if channel is None:
             await ctx.send("You didn't give me a channel, so I'll use the current one!")
@@ -67,3 +69,7 @@ class Reactions(commands.Cog, name="ReactionRoles")
                 "is_enabled": True,
             }
         )
+
+
+def setup(bot):
+    bot.add_cog(Reactions(bot))

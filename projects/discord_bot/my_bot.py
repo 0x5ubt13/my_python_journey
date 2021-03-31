@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 import discord
-import emojis
 import logging
 import json
-import typing
 from pathlib import Path
 import os
 from discord.ext import commands
@@ -18,7 +16,6 @@ bot = commands.Bot(command_prefix='$', case_insensitive=True, owner_id=339875659
 bot.config_token = secret_file['token']
 logging.basicConfig(level=logging.INFO)
 
-bot.version = '0.1'
 
 
 # If the bot is up and running, print the message to console and change the Game overlay
@@ -70,7 +67,7 @@ async def echo(ctx, *, message=None):
 # When running this file, if it is the 'main' file
 # i.e. it's not being imported from another python file, run this
 if __name__ == '__main__':
-    bot.reaction_roles = Document(bot.db, "reaction_roles")
+    #bot.reaction_roles = Document(bot.db, "reaction_roles")
 
     for file in os.listdir(cwd+"/cogs"):
         # Ignoring all the files starting with underscore
