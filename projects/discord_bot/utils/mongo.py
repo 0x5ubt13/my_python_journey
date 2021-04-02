@@ -114,6 +114,7 @@ class Document():
         a pre-existing document in the collection
         This function parses an input Dictionary to get
         the relevant information needed to unset.
+
         Params:
          - data (Dictionary) : Dictionary to parse for info
         """
