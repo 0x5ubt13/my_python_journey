@@ -1,0 +1,2 @@
+utilsx~=0.3.53
+gitpython

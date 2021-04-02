@@ -1,3 +1,4 @@
 .DS_Store
 .vscode/settings.json
 /projects/discord_bot/bot_config/secrets.json
+projects/discord_bot/config/config.cfg
