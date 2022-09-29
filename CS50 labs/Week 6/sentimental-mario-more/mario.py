@@ -1,10 +1,13 @@
 def get_height():
     """Input user for height, repeat if not within bounds"""
     while True:
-        h = int(input("Height: ").rstrip())
-        if h < 9 and h > 0:
-            return h
-        print("Please enter a height value between 1 and 8 inclusive")
+        h = input("Height: ").rstrip()
+        try:
+            h = int(h)
+            if h < 9 and h > 0:
+                return h
+        except ValueError:
+            print("Please enter a height value between 1 and 8 inclusive")
 
 
 def draw_pyramids(current_height, total_height):
@@ -21,7 +24,7 @@ def draw_pyramids(current_height, total_height):
     for i in range(current_height):
         print("#", end="")
 
-    print(" ", end="")
+    print("  ", end="")
 
     for i in range(current_height):
         print("#", end="")
@@ -36,4 +39,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()          
+    main()
