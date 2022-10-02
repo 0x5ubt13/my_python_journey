@@ -17,7 +17,7 @@ def main():
         with open(sys.argv[2], "r") as seq_file:
             seq = seq_file.readlines()
 
-            # TODO: Find longest match of each STR in DNA sequence
+            # Find longest match of each STR in DNA sequence
             for row in db_reader:
                 number_of_STR = 0
                 matches = 0
@@ -31,7 +31,7 @@ def main():
                     if longest_run == int(v):
                         matches += 1
 
-                # TODO: Check database for matching profiles
+                # Check database for matching profiles
                 if matches == number_of_STR:
                     print(name)
                     return

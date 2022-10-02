@@ -1,3 +1,6 @@
 .DS_Store
 .vscode/settings.json
 projects/discord_bot/config/config.cfg
+*.txt
+*.db
+*.csv
