@@ -1,1 +1,3 @@
-SELECT title, rating FROM movies, ratings WHERE movies.year = '2010' AND movies.id = ratings.movie_id;
+SELECT title, year FROM movies
+WHERE title LIKE 'Harry Potter%'
+ORDER BY year ASC;
