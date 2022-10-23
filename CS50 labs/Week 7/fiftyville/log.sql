@@ -42,6 +42,7 @@ AND transcript LIKE '%bakery%';
 -- 2. Check ATM withdrawals on Leggett street that morning
 -- 3. Check earlierst flight next day...
 -- 4. ... and the bank accounts on that day (28|7|2021) after the theft 
+-- 5. Check phone calls
 
 -- 1: 
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs 
@@ -64,17 +65,18 @@ AND transaction_type = 'withdraw' AND atm_location = 'Leggett Street';
 --      81061156|withdraw|30|Leggett Street
 --      26013199|withdraw|35|Leggett Street
 -- 3: 
-SELECT day, hour, minute, (
+SELECT flights.id, day, hour, minute, destination_airport_id, (
     SELECT city FROM airports WHERE destination_airport_id = airports.id
-    ) 
-FROM flights JOIN airports ON origin_airport_id = airports.id 
+    )
+FROM flights JOIN airports ON origin_airport_id = airports.id
 WHERE origin_airport_id = (
     SELECT id FROM airports WHERE city = 'Fiftyville'
-    ) 
-AND day = '29' AND month = '7' AND year = '2021' 
-ORDER BY hour 
-LIMIT 1;        
---      29|8|20|New York City
+    )
+AND day = '29' AND month = '7' AND year = '2021'
+ORDER BY hour
+LIMIT 1;
+--      36|29|8|20|4|New York City      
+
 
 -- 4 ... and the bank accounts on that day (28|7|2021) after the theft 
 SELECT account_number, (
@@ -98,7 +100,57 @@ WHERE account_number IN (
 --      81061156|Benista|2018
 
 
+-- xref plates from bakery security logs with names from above, and names from bank accounts:
+SELECT * FROM people
+WHERE license_plate IN (
+    SELECT license_plate FROM bakery_security_logs
+    WHERE year = 2021 AND month = 7 AND day = 28 AND hour = 10 AND minute >= 15 AND minute <= 25
+    ) 
+AND name IN (
+    SELECT (
+        SELECT name FROM people WHERE person_id = people.id
+        )
+    FROM bank_accounts JOIN people ON person_id = people.id 
+    WHERE account_number IN (
+        SELECT account_number FROM atm_transactions 
+        WHERE year = '2021' AND month = '7' AND day = 28 
+        AND transaction_type = 'withdraw' AND atm_location = 'Leggett Street'
+        )
+        );
 
+-- 396669|Iman|(829) 555-5269|7049073643|L93JTIZ
+-- 467400|Luca|(389) 555-5198|8496433585|4328GD8
+-- 514354|Diana|(770) 555-1861|3592750733|322W7JE
+-- 686048|Bruce|(367) 555-5533|5773159633|94KL13X
 
+-- 5. Check phone calls
+SELECT (
+    SELECT name FROM people WHERE phone_number = caller
+    ), 
+    (SELECT name FROM people WHERE phone_number = receiver
+    ), duration, day, month, year 
+FROM phone_calls JOIN people ON people.phone_number = phone_calls.caller 
+WHERE year = '2021' AND month = '7' AND day = '28' AND duration < 60 
+AND name IN (SELECT name FROM people
+WHERE license_plate IN (
+    SELECT license_plate FROM bakery_security_logs
+    WHERE year = 2021 AND month = 7 AND day = 28 AND hour = 10 AND minute >= 15 AND minute <= 25
+    ) 
+AND name IN (
+    SELECT (
+        SELECT name FROM people WHERE person_id = people.id
+        )
+    FROM bank_accounts JOIN people ON person_id = people.id 
+    WHERE account_number IN (
+        SELECT account_number FROM atm_transactions 
+        WHERE year = '2021' AND month = '7' AND day = 28 
+        AND transaction_type = 'withdraw' AND atm_location = 'Leggett Street'
+        )
+        ));
+--          Bruce|Robin|45|28|7|2021
 
+-- Our thief is Bruce, the accomplice is Robin
 
+SELECT (SELECT name FROM people WHERE people.passport_number = passengers.passport_number) FROM passengers JOIN flights ON passengers.flight_id = flights.id  WHERE flights.id = 36;
+
+-- Confirmed Bruce is in the flight
